@@ -49,7 +49,7 @@ public class ActualizarPerfilServlet extends HttpServlet {
         String telefonoUsuario = request.getParameter("telefono");
         Date fecha_nacimientoUsuario = null;
         try {
-            fecha_nacimientoUsuario = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_inicio_est"));
+            fecha_nacimientoUsuario = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_nacimiento"));
         } catch (ParseException ex) {
             Logger.getLogger(ActualizarPerfilServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

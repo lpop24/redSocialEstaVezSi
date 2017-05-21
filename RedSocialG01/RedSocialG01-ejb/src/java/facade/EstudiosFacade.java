@@ -6,9 +6,11 @@
 package facade;
 
 import entity.Estudios;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
 
     public EstudiosFacade() {
         super(Estudios.class);
+    }
+
+    public List<Estudios> findEstudiosPoridUsuario(int idLista) {
+        Query q; 
+        
+        q = em.createQuery("select est from Estudios est where est.estudiosUsuarioFK.idUsuario = :id");
+        q.setParameter("id",  idLista);
+        return q.getResultList();
     }
     
 }

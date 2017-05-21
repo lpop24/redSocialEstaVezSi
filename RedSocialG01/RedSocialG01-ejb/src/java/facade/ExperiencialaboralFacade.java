@@ -6,9 +6,11 @@
 package facade;
 
 import entity.Experiencialaboral;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +31,11 @@ public class ExperiencialaboralFacade extends AbstractFacade<Experiencialaboral>
         super(Experiencialaboral.class);
     }
     
+    public List<Experiencialaboral> findExperienciaslaboralesPoridUsuario(int id) {
+        Query q; 
+        
+        q = em.createQuery("select exp from Experiencialaboral exp where exp.expLaboralUsuarioFK.idUsuario = :id");
+        q.setParameter("id",  id);
+        return q.getResultList();
+    }
 }

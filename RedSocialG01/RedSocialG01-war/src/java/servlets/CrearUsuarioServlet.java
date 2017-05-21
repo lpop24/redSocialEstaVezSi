@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sevlets;
+package servlets;
 
+import facade.EstudiosFacade;
+import facade.LoginFacade;
+import facade.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +23,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CrearUsuarioServlet", urlPatterns = {"/CrearUsuarioServlet"})
 public class CrearUsuarioServlet extends HttpServlet {
+
+    @EJB
+    private LoginFacade loginFacade;
+
+    @EJB
+    private EstudiosFacade estudiosFacade;
+
+    @EJB
+    private UsuarioFacade usuarioFacade;
+    
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

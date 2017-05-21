@@ -73,7 +73,7 @@ public class ActualizarPerfilServlet extends HttpServlet {
         
         usuarioFacade.edit(usuarioEditar);
         
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/Perfilservlet");
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
     }
 

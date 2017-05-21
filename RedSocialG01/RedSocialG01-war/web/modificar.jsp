@@ -57,8 +57,6 @@
                         <td>Aficiones:</td>
                         <td><input type="text" name="aficiones" value="<%= usuario.getAficiones()%>"></td>
                     </tr>
-
-                    
                     <tr>
                         <td>Ciudad:</td>
                         <td><input type="text" name="ciudad" value="<%= usuario.getCiudad()%>"></td>

@@ -6,12 +6,17 @@
 
 package servlets;
 
+import entity.Estudios;
+import entity.Experiencialaboral;
 import entity.Usuario;
+import facade.EstudiosFacade;
+import facade.ExperiencialaboralFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -29,15 +34,23 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ActualizarPerfil", urlPatterns = {"/ActualizarPerfil"})
 public class ActualizarPerfilServlet extends HttpServlet {
+
+    @EJB
+    private ExperiencialaboralFacade experiencialaboralFacade;
+
+    @EJB
+    private EstudiosFacade estudiosFacade;
     
     @EJB
     private UsuarioFacade usuarioFacade;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         
         
         HttpSession session = request.getSession();
+        
+        //Actualizar usuario
         
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         
@@ -47,12 +60,7 @@ public class ActualizarPerfilServlet extends HttpServlet {
         String emailUsuario = request.getParameter("email");
         String twitterUsuario = request.getParameter("twitter");
         String telefonoUsuario = request.getParameter("telefono");
-        Date fecha_nacimientoUsuario = null;
-        try {
-            fecha_nacimientoUsuario = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_nacimiento"));
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarPerfilServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Date fecha_nacimientoUsuario = fecha_nacimientoUsuario = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_nacimiento"));
         String pagina_webUsuario = request.getParameter("pagina_web");
         String aficionesUsuario = request.getParameter("aficiones");
         String ciudadUsuario = request.getParameter("ciudad");
@@ -73,6 +81,45 @@ public class ActualizarPerfilServlet extends HttpServlet {
         
         usuarioFacade.edit(usuarioEditar);
         
+//        //Actualizar estudios
+//        
+//        List<Estudios> estudios = estudiosFacade.findEstudiosPoridUsuario(usuario.getIdUsuario());
+//        String[] idEstudios = request.getParameterValues("idEstudio");
+//        String[] nombresCentro = request.getParameterValues("nombreCentro");
+//        String[] fechasInicioEstudio = request.getParameterValues("fechaInicioEstudio");
+//        String[] fechasFinEstudio = request.getParameterValues("fechaFinEstudio");
+//        
+//        
+//        Estudios estudioActualizar;
+//        
+//        for(Estudios est : estudios)
+//        {
+//            estudioActualizar = estudiosFacade.findEstudioPorIdEstudio(est.getIdEstudios());
+//            estudioActualizar.setNombreCentro(request.getParameter("nombreCentro"));
+//            estudioActualizar.setFechaInicioEstudios(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaInicioEstudio")));
+//            estudioActualizar.setFechaFinEstudios(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaFinEstudio")));
+//            estudioActualizar.setUbicacionCentro(request.getParameter("ubicacionCentro"));
+//            estudioActualizar.setDescripcionCentro("descripcionCentro");
+//            
+//            estudiosFacade.edit(estudioActualizar);
+//        }
+//        
+//        //Actualizar exp.laboral
+//        
+//        List<Experiencialaboral> experiencias = experiencialaboralFacade.findExperienciaslaboralesPoridUsuario(usuario.getIdUsuario());
+//        
+//        for(Experiencialaboral exp : experiencias)
+//        {
+//            exp.setNombreEmpresa(request.getParameter("nombreEmpresa"));
+//            exp.setFechaInicioLaboral(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaInicioLaboral")));
+//            exp.setFechaFinLaboral(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaFinLaboral")));
+//            exp.setPaginaWebEmpresa(request.getParameter("paginaWebEmpresa"));
+//            exp.setUbicacionEmpresa(request.getParameter("ubicacionEmpresa"));
+//            exp.setDescripcionEmpresa("descripcionEmpresa");
+//            
+//            experiencialaboralFacade.edit(exp);
+//        }
+        
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
     }
@@ -89,7 +136,11 @@ public class ActualizarPerfilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ActualizarPerfilServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,7 +154,11 @@ public class ActualizarPerfilServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ActualizarPerfilServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -120,7 +120,7 @@
             </table>
             <br/>
             <br/>
-            
+            <% if (estudios != null){ %>
             <table>
                 <th>Estudios</th>
                     <%for(Estudios est: estudios){ %>
@@ -149,6 +149,8 @@
                     <br/>
                     <%}%>
               </table><br/>
+              <% } %>
+              <% if (experiencia != null){ %>
               <table>
                 <th>Experiencia Laboral</th>
                     <%for(Experiencialaboral exp: experiencia){ %>
@@ -183,8 +185,8 @@
                     <br/>
                     <%}%>
               </table>
-            
+            <% } %>
         <br/>
-        <input type="button" value="Modificar Perfil" onClick="location.href = '/modificar.jsp'">
+        <input type="button" value="Modificar Perfil" onClick="location.href = '/RedSocialG01-war/modificar.jsp'" >
     </body>
 </html>

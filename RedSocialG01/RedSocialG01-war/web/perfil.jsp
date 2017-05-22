@@ -49,12 +49,11 @@
         byte[] foto;
         //foto = (byte[]) request.getAttribute("foto");
         */
-        
         List<Experiencialaboral> experiencia;
-        experiencia = (List<Experiencialaboral>) request.getAttribute("experiencia");
+        experiencia = (List<Experiencialaboral>) session.getAttribute("experiencia");
         
         List<Estudios> estudios;
-        estudios = (List<Estudios>)request.getAttribute ("estudios");
+        estudios = (List<Estudios>)session.getAttribute ("estudios");
         
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -118,81 +117,159 @@
                 <br/>
                 <br/>
             </table>
-            <input type="button" value="Modificar Perfil" onClick="location.href = '/RedSocialG01-war/modificarPerfil.jsp'" >
+            <input type="button" value="Modificar Perfil" onClick="location.href = 'modificarPerfil.jsp'" >
             <br/>
             <br/>
+            
+            
+            <!--
             <% if (estudios != null){ %>
-            <table>
-                <th>Estudios</th>
-                    <%for(Estudios est: estudios){ %>
-                    <tr>
-                    <td><b>Nombre: </b></td><td><%= est.getNombreCentro() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de inicio: </b></td><td>
-                    <%java.util.Date fechaInicioEst=est.getFechaInicioEstudios();%>
-                    <%=fechaInicioEst%><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de finalización: </b></td><td>
-                    <%java.util.Date fechaFinEst=est.getFechaFinEstudios();%>
-                    <%=fechaFinEst%><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Ubicación: </b></td><td><%= est.getUbicacionCentro() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
-                    </tr>                    
-                    <tr>
-                    <td><a href = "modificarEstudios.jsp?id=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
-                    </tr>
-                    <br/>
-                    </tr>
-                    <tr>
-                        <td><br/></td>
-                    </tr>
-                    <%}%>
-              </table><br/>
+                <h2>Estudios</h2>
+                    <form name="formularioEstudio" method="post" action="modificarEstudios.jsp">
+                    <% for(Estudios est: estudios){ %>
+                        <table>
+                            <tr>
+                            <td><b>Nombre: </b></td><td><%= est.getNombreCentro() %><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Fecha de inicio: </b></td><td>
+                            <%java.util.Date fechaInicioEst=est.getFechaInicioEstudios();%>
+                            <%=fechaInicioEst%><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Fecha de finalización: </b></td><td>
+                            <%java.util.Date fechaFinEst=est.getFechaFinEstudios();%>
+                            <%=fechaFinEst%><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Ubicación: </b></td><td><%= est.getUbicacionCentro() %><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
+                            </tr>
+                            <br/>
+                        </table>
+                    <% } %>
+                    <button>Modificar Estudios</button>
+                    </form>
+              <br/>
               <% } %>
+              
+              
+              
               <% if (experiencia != null){ %>
-              <table>
-                <th>Experiencia Laboral</th>
+              <% int count =0; %>
+              
+                <h2>Experiencia Laboral</h2>
                     <%for(Experiencialaboral exp: experiencia){ %>
-                    <tr>
-                    <td><b>Nombre: </b></td><td><%= exp.getNombreEmpresa() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Puesto: </b></td><td><%= exp.getPuesto() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de inicio: </b></td><td>
-                    <%java.util.Date fechaInicioEst=exp.getFechaInicioLaboral();%>
-                    <%=fechaInicioEst%><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de finalización: </b></td><td>
-                    <%java.util.Date fechaFinEst=exp.getFechaFinLaboral();%>
-                    <%=fechaFinEst%><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Web: </b></td><td><%= exp.getPaginaWebEmpresa() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Ubicación: </b></td><td><%= exp.getUbicacionEmpresa() %><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
-                    <tr>
-                    <td><a href = "modificarExperienciaLaboral.jsp?id=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia Laboral</a></td>
-                    </tr>
-                    <td> <br/></td>
-                    </tr>
-                    <br/>
+                        <form name="formularioExperienciaLaboral<%= count %>" method="post" action="modificarExperienciaLaboral.jsp">
+                        <table>
+                        <tr>
+                        <td><b>Nombre: </b></td><td><%= exp.getNombreEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Puesto: </b></td><td><%= exp.getPuesto() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Fecha de inicio: </b></td><td>
+                        <%java.util.Date fechaInicioEst=exp.getFechaInicioLaboral();%>
+                        <%=fechaInicioEst%><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Fecha de finalización: </b></td><td>
+                        <%java.util.Date fechaFinEst=exp.getFechaFinLaboral();%>
+                        <%=fechaFinEst%><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Web: </b></td><td><%= exp.getPaginaWebEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Ubicación: </b></td><td><%= exp.getUbicacionEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
+                        <tr>
+                        <% request.setAttribute("Experiencia", exp); %>
+                        <% count++; %>
+                        <br/>
+                        </table>
+                        <button>Modificar Experiencia</button>
+                    </form>
                     <%}%>
-              </table>
             <% } %>
         <br/>
-        
+        -->
+        <% if (estudios != null){ %>
+                <h2>Estudios</h2>
+                    <% for(Estudios est: estudios){ %>
+                        <table>
+                            <tr>
+                            <td><b>Nombre: </b></td><td><%= est.getNombreCentro() %><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Fecha de inicio: </b></td><td>
+                            <%java.util.Date fechaInicioEst=est.getFechaInicioEstudios();%>
+                            <%=fechaInicioEst%><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Fecha de finalización: </b></td><td>
+                            <%java.util.Date fechaFinEst=est.getFechaFinEstudios();%>
+                            <%=fechaFinEst%><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Ubicación: </b></td><td><%= est.getUbicacionCentro() %><br/></td>
+                            </tr>
+                            <tr>
+                            <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
+                            </tr>
+                            <tr>
+                                <td><a href="BuscarEstudio?id=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
+                            </tr>
+                            <br/>
+                        </table>
+                    <% } %>
+              <br/>
+              <% } %>
+              
+               <% if (experiencia != null){ %>
+              <% int count =0; %>
+              
+                <h2>Experiencia Laboral</h2>
+                    <%for(Experiencialaboral exp: experiencia){ %>
+                        <table>
+                        <tr>
+                        <td><b>Nombre: </b></td><td><%= exp.getNombreEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Puesto: </b></td><td><%= exp.getPuesto() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Fecha de inicio: </b></td><td>
+                        <%java.util.Date fechaInicioEst=exp.getFechaInicioLaboral();%>
+                        <%=fechaInicioEst%><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Fecha de finalización: </b></td><td>
+                        <%java.util.Date fechaFinEst=exp.getFechaFinLaboral();%>
+                        <%=fechaFinEst%><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Web: </b></td><td><%= exp.getPaginaWebEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Ubicación: </b></td><td><%= exp.getUbicacionEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                        <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
+                        </tr>
+                        <tr>
+                           <td><a href="BuscarExperienciaLaboral?id=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia</a></td>
+                        </tr>
+                        <br/>
+                        </table>
+                    <%}%>
+                    <br/>
+            <% } %>
+        <br/>
     </body>
 </html>

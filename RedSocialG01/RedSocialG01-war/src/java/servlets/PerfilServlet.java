@@ -114,11 +114,11 @@ public class PerfilServlet extends HttpServlet {
         int idLista = id;
         
         List<Experiencialaboral> experiencia = experiencialaboralFacade.findExperienciaslaboralesPoridUsuario(idLista);
-        request.setAttribute ("experiencia", experiencia);
+        session.setAttribute ("experiencia", experiencia);
         
         
         List<Estudios> estudios =estudiosFacade.findEstudiosPoridUsuario(idLista);
-        request.setAttribute ("estudios", estudios);
+        session.setAttribute ("estudios", estudios);
         
         RequestDispatcher rd;
         

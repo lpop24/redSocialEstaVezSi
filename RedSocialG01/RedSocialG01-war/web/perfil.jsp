@@ -118,6 +118,7 @@
                 <br/>
                 <br/>
             </table>
+            <input type="button" value="Modificar Perfil" onClick="location.href = '/RedSocialG01-war/modificarPerfil.jsp'" >
             <br/>
             <br/>
             <% if (estudios != null){ %>
@@ -143,6 +144,7 @@
                     <tr>
                     <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
                     </tr>
+                    <input type="button" value="Modificar Estudios" onClick="location.href = 'modificarEstudios.jsp?id=<%= est.getIdEstudios() %>'" >
                     <tr>
                     <td> <br/></td>
                     </tr>
@@ -179,6 +181,7 @@
                     <tr>
                     <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
                     </tr>
+                    <input type="button" value="Modificar Estudios" onClick="location.href = 'modificarExperienciaLaboral.jsp?=<%= exp.getIdExperienciaLaboral() %>'" >
                     <tr>
                     <td> <br/></td>
                     </tr>
@@ -187,6 +190,6 @@
               </table>
             <% } %>
         <br/>
-        <input type="button" value="Modificar Perfil" onClick="location.href = '/RedSocialG01-war/modificar.jsp'" >
+        
     </body>
 </html>

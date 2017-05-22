@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Loubna Channouf Cherradi
+ * 
+ * 
  */
 @WebServlet(name = "CrearUsuarioServlet", urlPatterns = {"/CrearUsuarioServlet"})
 public class CrearUsuarioServlet extends HttpServlet {
@@ -103,6 +106,9 @@ public class CrearUsuarioServlet extends HttpServlet {
         usuario.setLoginFK(login);
         
         this.usuarioFacade.create(usuario);
+        
+//        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
+//        rd.forward(request, response);
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {

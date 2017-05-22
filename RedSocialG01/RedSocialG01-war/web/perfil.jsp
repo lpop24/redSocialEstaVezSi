@@ -143,12 +143,15 @@
                     </tr>
                     <tr>
                     <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
-                    </tr>
-                    <input type="button" value="Modificar Estudios" onClick="location.href = 'modificarEstudios.jsp?id=<%= est.getIdEstudios() %>'" >
+                    </tr>                    
                     <tr>
-                    <td> <br/></td>
+                    <td><a href = "modificarEstudios.jsp?id=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
                     </tr>
                     <br/>
+                    </tr>
+                    <tr>
+                        <td><br/></td>
+                    </tr>
                     <%}%>
               </table><br/>
               <% } %>
@@ -180,9 +183,9 @@
                     </tr>
                     <tr>
                     <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
-                    </tr>
-                    <input type="button" value="Modificar Estudios" onClick="location.href = 'modificarExperienciaLaboral.jsp?=<%= exp.getIdExperienciaLaboral() %>'" >
                     <tr>
+                    <td><a href = "modificarExperienciaLaboral.jsp?id=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia Laboral</a></td>
+                    </tr>
                     <td> <br/></td>
                     </tr>
                     <br/>

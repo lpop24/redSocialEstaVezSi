@@ -60,7 +60,7 @@ public class ActualizarPerfilServlet extends HttpServlet {
         String emailUsuario = request.getParameter("email");
         String twitterUsuario = request.getParameter("twitter");
         String telefonoUsuario = request.getParameter("telefono");
-        Date fecha_nacimientoUsuario = fecha_nacimientoUsuario = new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fecha_nacimiento"));
+        Date fecha_nacimientoUsuario = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha_nacimiento"));
         String pagina_webUsuario = request.getParameter("pagina_web");
         String aficionesUsuario = request.getParameter("aficiones");
         String ciudadUsuario = request.getParameter("ciudad");

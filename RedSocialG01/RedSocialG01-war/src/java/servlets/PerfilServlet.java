@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(name = "Perfilservlet", urlPatterns = {"/Perfilservlet"})
+@WebServlet(name = "PerfilServlet", urlPatterns = {"/PerfilServlet"})
 public class PerfilServlet extends HttpServlet {
 
     @EJB

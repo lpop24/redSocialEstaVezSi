@@ -200,7 +200,7 @@
                     <br/>
             <% } %>
         <br/>
-        
+        <input type="button" value="Añadir Experiencia Laboral" onClick="location.href = 'anadirExperienciaLaboral.jsp'"><br/>
         <input type="button" value="Cerrar Sesión" onClick="location.href = 'CerrarSesion'"> 
     </body>
 </html>

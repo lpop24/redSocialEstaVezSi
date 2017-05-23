@@ -65,6 +65,10 @@ public class CrearELYEstudios extends HttpServlet {
         
         Usuario usuario = usuarios.get(0);
         
+        /**
+         * EXPERIENCIA LABORAL
+         **/ 
+        
         Experiencialaboral explaboral = new Experiencialaboral();
         
         String nombreEmpresa = request.getParameter("nombreEmpresa");
@@ -91,6 +95,11 @@ public class CrearELYEstudios extends HttpServlet {
 //        expLaboral.add(explaboral);
 //        usuario.setExperiencialaboralCollection(expLaboral);
         
+
+        /**
+         * ESTUDIOS
+         **/ 
+
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
     }

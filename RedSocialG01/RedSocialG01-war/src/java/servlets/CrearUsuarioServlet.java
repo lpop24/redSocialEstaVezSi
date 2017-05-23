@@ -67,6 +67,7 @@ public class CrearUsuarioServlet extends HttpServlet {
          * LOGIN
          **/
         
+        
         Login login = new Login();
         
         String usuarioLogin = request.getParameter("usuarioLogin");

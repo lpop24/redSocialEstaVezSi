@@ -27,6 +27,6 @@
             <button>Entrar</button>
         </form>
         <br/>
-        <input type="button" value="CrearCuenta" onClick="location.href = 'darDeAlta.jsp'">   
+        <input type="button" value="Crear Cuenta" onClick="location.href = 'crearUsuario.jsp'">   
     </body>
 </html>

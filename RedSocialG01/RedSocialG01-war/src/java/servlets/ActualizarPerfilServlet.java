@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -34,12 +35,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ActualizarPerfil", urlPatterns = {"/ActualizarPerfil"})
 public class ActualizarPerfilServlet extends HttpServlet {
-
-    @EJB
-    private ExperiencialaboralFacade experiencialaboralFacade;
-
-    @EJB
-    private EstudiosFacade estudiosFacade;
     
     @EJB
     private UsuarioFacade usuarioFacade;
@@ -60,65 +55,26 @@ public class ActualizarPerfilServlet extends HttpServlet {
         String emailUsuario = request.getParameter("email");
         String twitterUsuario = request.getParameter("twitter");
         String telefonoUsuario = request.getParameter("telefono");
-        Date fecha_nacimientoUsuario = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha_nacimiento"));
+        Date fecha_nacimientoUsuario = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fecha_nacimiento"));
         String pagina_webUsuario = request.getParameter("pagina_web");
         String aficionesUsuario = request.getParameter("aficiones");
         String ciudadUsuario = request.getParameter("ciudad");
         
-        Usuario usuarioEditar;
-        usuarioEditar = this.usuarioFacade.find(usuario.getIdUsuario());
+        //Usuario usuarioEditar;
+        //usuarioEditar = this.usuarioFacade.find(usuario.getIdUsuario());
         
-        usuarioEditar.setNombre(nombreUsuario);
-        usuarioEditar.setApellidos(apellidosUsuario);
-        usuarioEditar.setInstagram(instagramUsuario);
-        usuarioEditar.setCorreoElectronico(emailUsuario);
-        usuarioEditar.setTwitter(twitterUsuario);
-        usuarioEditar.setTelefono(telefonoUsuario);
-        usuarioEditar.setFechaNacimiento(fecha_nacimientoUsuario);
-        usuarioEditar.setPaginaWebUsuario(pagina_webUsuario);
-        usuarioEditar.setAficiones(aficionesUsuario);
-        usuarioEditar.setCiudad(ciudadUsuario);
+        usuario.setNombre(nombreUsuario);
+        usuario.setApellidos(apellidosUsuario);
+        usuario.setInstagram(instagramUsuario);
+        usuario.setCorreoElectronico(emailUsuario);
+        usuario.setTwitter(twitterUsuario);
+        usuario.setTelefono(telefonoUsuario);
+        usuario.setFechaNacimiento(fecha_nacimientoUsuario);
+        usuario.setPaginaWebUsuario(pagina_webUsuario);
+        usuario.setAficiones(aficionesUsuario);
+        usuario.setCiudad(ciudadUsuario);
         
-        usuarioFacade.edit(usuarioEditar);
-        
-//        //Actualizar estudios
-//        
-//        List<Estudios> estudios = estudiosFacade.findEstudiosPoridUsuario(usuario.getIdUsuario());
-//        String[] idEstudios = request.getParameterValues("idEstudio");
-//        String[] nombresCentro = request.getParameterValues("nombreCentro");
-//        String[] fechasInicioEstudio = request.getParameterValues("fechaInicioEstudio");
-//        String[] fechasFinEstudio = request.getParameterValues("fechaFinEstudio");
-//        
-//        
-//        Estudios estudioActualizar;
-//        
-//        for(Estudios est : estudios)
-//        {
-//            estudioActualizar = estudiosFacade.findEstudioPorIdEstudio(est.getIdEstudios());
-//            estudioActualizar.setNombreCentro(request.getParameter("nombreCentro"));
-//            estudioActualizar.setFechaInicioEstudios(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaInicioEstudio")));
-//            estudioActualizar.setFechaFinEstudios(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaFinEstudio")));
-//            estudioActualizar.setUbicacionCentro(request.getParameter("ubicacionCentro"));
-//            estudioActualizar.setDescripcionCentro("descripcionCentro");
-//            
-//            estudiosFacade.edit(estudioActualizar);
-//        }
-//        
-//        //Actualizar exp.laboral
-//        
-//        List<Experiencialaboral> experiencias = experiencialaboralFacade.findExperienciaslaboralesPoridUsuario(usuario.getIdUsuario());
-//        
-//        for(Experiencialaboral exp : experiencias)
-//        {
-//            exp.setNombreEmpresa(request.getParameter("nombreEmpresa"));
-//            exp.setFechaInicioLaboral(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaInicioLaboral")));
-//            exp.setFechaFinLaboral(new SimpleDateFormat("dd-MM-yyyy").parse(request.getParameter("fechaFinLaboral")));
-//            exp.setPaginaWebEmpresa(request.getParameter("paginaWebEmpresa"));
-//            exp.setUbicacionEmpresa(request.getParameter("ubicacionEmpresa"));
-//            exp.setDescripcionEmpresa("descripcionEmpresa");
-//            
-//            experiencialaboralFacade.edit(exp);
-//        }
+        usuarioFacade.edit(usuario);
         
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);

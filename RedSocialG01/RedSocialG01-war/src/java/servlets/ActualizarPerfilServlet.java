@@ -60,9 +60,6 @@ public class ActualizarPerfilServlet extends HttpServlet {
         String aficionesUsuario = request.getParameter("aficiones");
         String ciudadUsuario = request.getParameter("ciudad");
         
-        //Usuario usuarioEditar;
-        //usuarioEditar = this.usuarioFacade.find(usuario.getIdUsuario());
-        
         usuario.setNombre(nombreUsuario);
         usuario.setApellidos(apellidosUsuario);
         usuario.setInstagram(instagramUsuario);

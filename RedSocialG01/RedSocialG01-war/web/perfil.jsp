@@ -122,83 +122,7 @@
             <br/>
             
             
-            <!--
-            <% if (estudios != null){ %>
-                <h2>Estudios</h2>
-                    <form name="formularioEstudio" method="post" action="modificarEstudios.jsp">
-                    <% for(Estudios est: estudios){ %>
-                        <table>
-                            <tr>
-                            <td><b>Nombre: </b></td><td><%= est.getNombreCentro() %><br/></td>
-                            </tr>
-                            <tr>
-                            <td><b>Fecha de inicio: </b></td><td>
-                            <%java.util.Date fechaInicioEst=est.getFechaInicioEstudios();%>
-                            <%=fechaInicioEst%><br/></td>
-                            </tr>
-                            <tr>
-                            <td><b>Fecha de finalización: </b></td><td>
-                            <%java.util.Date fechaFinEst=est.getFechaFinEstudios();%>
-                            <%=fechaFinEst%><br/></td>
-                            </tr>
-                            <tr>
-                            <td><b>Ubicación: </b></td><td><%= est.getUbicacionCentro() %><br/></td>
-                            </tr>
-                            <tr>
-                            <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
-                            </tr>
-                            <br/>
-                        </table>
-                    <% } %>
-                    <button>Modificar Estudios</button>
-                    </form>
-              <br/>
-              <% } %>
-              
-              
-              
-              <% if (experiencia != null){ %>
-              <% int count =0; %>
-              
-                <h2>Experiencia Laboral</h2>
-                    <%for(Experiencialaboral exp: experiencia){ %>
-                        <form name="formularioExperienciaLaboral<%= count %>" method="post" action="modificarExperienciaLaboral.jsp">
-                        <table>
-                        <tr>
-                        <td><b>Nombre: </b></td><td><%= exp.getNombreEmpresa() %><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Puesto: </b></td><td><%= exp.getPuesto() %><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Fecha de inicio: </b></td><td>
-                        <%java.util.Date fechaInicioEst=exp.getFechaInicioLaboral();%>
-                        <%=fechaInicioEst%><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Fecha de finalización: </b></td><td>
-                        <%java.util.Date fechaFinEst=exp.getFechaFinLaboral();%>
-                        <%=fechaFinEst%><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Web: </b></td><td><%= exp.getPaginaWebEmpresa() %><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Ubicación: </b></td><td><%= exp.getUbicacionEmpresa() %><br/></td>
-                        </tr>
-                        <tr>
-                        <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
-                        <tr>
-                        <% request.setAttribute("Experiencia", exp); %>
-                        <% count++; %>
-                        <br/>
-                        </table>
-                        <button>Modificar Experiencia</button>
-                    </form>
-                    <%}%>
-            <% } %>
-        <br/>
-        -->
+    
         <% if (estudios != null){ %>
                 <h2>Estudios</h2>
                     <% for(Estudios est: estudios){ %>
@@ -227,9 +151,12 @@
                             </tr>
                             <br/>
                         </table>
+                            
                     <% } %>
+                    
               <br/>
               <% } %>
+              <input type="button" value="Añadir Estudios" onClick="location.href = 'anadirEstudios.jsp'">
               
                <% if (experiencia != null){ %>
               <% int count =0; %>
@@ -271,5 +198,7 @@
                     <br/>
             <% } %>
         <br/>
+        <input type="button" value="Añadir Experiencia Laboral" onClick="location.href = 'anadirExperienciaLaboral.jsp'">
+        
     </body>
 </html>

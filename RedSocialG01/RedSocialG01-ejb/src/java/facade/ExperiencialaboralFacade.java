@@ -38,4 +38,6 @@ public class ExperiencialaboralFacade extends AbstractFacade<Experiencialaboral>
         q.setParameter("id",  id);
         return q.getResultList();
     }
+    
+   
 }

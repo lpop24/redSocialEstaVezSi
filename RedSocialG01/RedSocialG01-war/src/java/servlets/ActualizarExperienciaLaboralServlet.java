@@ -8,6 +8,12 @@ package servlets;
 import entity.Experiencialaboral;
 import facade.ExperiencialaboralFacade;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +41,7 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
 
         String idExperiencia = request.getParameter("idExperienciaLaboral");
         String nombreEmpresa = request.getParameter("nombreEmpresa");
@@ -46,8 +52,8 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
         
         int idExpint = new Integer(idExperiencia);
         
-        //Date fechaInicioExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioExp"));
-        //Date fechaFinExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinExp"));
+        Date fechaInicioExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaInicioExp"));
+        Date fechaFinExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaFinExp"));
         
         Experiencialaboral exp = this.experiencialaboralFacade.find(idExpint);
         
@@ -55,8 +61,8 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
         exp.setUbicacionEmpresa(ubicacion);  
         exp.setPuesto(puesto); 
         exp.setPaginaWebEmpresa(web);
-        //exp.setFechaInicioEstudios(fechaInicioEstudio);
-        //exp.setFechaFinEstudios(fechaFinEstudio);
+        exp.setFechaInicioLaboral(fechaInicioExp);
+        exp.setFechaFinLaboral(fechaFinExp);
         exp.setDescripcionEmpresa(descripcion);
         
         this.experiencialaboralFacade.edit(exp);
@@ -76,7 +82,11 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -90,7 +100,11 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

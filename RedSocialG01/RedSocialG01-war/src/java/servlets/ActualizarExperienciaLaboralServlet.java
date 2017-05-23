@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author RetailAdmin
+ * @author DaniUni
  */
-@WebServlet(name = "BuscarExperienciaLaboral", urlPatterns = {"/BuscarExperienciaLaboral"})
-public class BuscarExperienciaLaboralServlet extends HttpServlet {
+@WebServlet(name = "ActualizarExperiencia", urlPatterns = {"/ActualizarExperiencia"})
+public class ActualizarExperienciaLaboralServlet extends HttpServlet {
 
     @EJB
-    private ExperiencialaboralFacade expFacade;
+    private ExperiencialaboralFacade experiencialaboralFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,16 +36,32 @@ public class BuscarExperienciaLaboralServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String idString =  request.getParameter("id");
-        int id = new Integer(idString);
-        Experiencialaboral exp = expFacade.find(id);
-        
-        request.setAttribute("experiencia", exp);
 
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/modificarExperienciaLaboral.jsp");
+        String idExperiencia = request.getParameter("idExperienciaLaboral");
+        String nombreEmpresa = request.getParameter("nombreEmpresa");
+        String puesto = request.getParameter("puesto");
+        String ubicacion = request.getParameter("ubicacionEmpresa");
+        String descripcion = request.getParameter("descripcionEmpresa");
+        String web = request.getParameter("web");
+        
+        int idExpint = new Integer(idExperiencia);
+        
+        //Date fechaInicioExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioExp"));
+        //Date fechaFinExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinExp"));
+        
+        Experiencialaboral exp = this.experiencialaboralFacade.find(idExpint);
+        
+        exp.setNombreEmpresa(nombreEmpresa);
+        exp.setUbicacionEmpresa(ubicacion);  
+        exp.setPuesto(puesto); 
+        exp.setPaginaWebEmpresa(web);
+        //exp.setFechaInicioEstudios(fechaInicioEstudio);
+        //exp.setFechaFinEstudios(fechaFinEstudio);
+        exp.setDescripcionEmpresa(descripcion);
+        
+        this.experiencialaboralFacade.edit(exp);
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

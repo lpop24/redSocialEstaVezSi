@@ -36,7 +36,6 @@
         <form name="formularioEstudio" method="post" action="ActualizarEstudio">
             <table>
                 <th>Estudio</th>  
-                    <tr><td><input type="hidden" name="idEstudio" value="<%= est.getIdEstudios() %>"></td></tr>
                     <tr>
                     <td><b>Nombre: </b></td><td><input type="text" name="nombreCentro" value="<%= est.getNombreCentro() %>"><br/></td>
                     </tr>
@@ -54,8 +53,9 @@
                     <tr>
                     <td><b>Descripción: </b></td><td><input type="text" name="descripcionCentro" value="<%= est.getDescripcionCentro() %>"><br/></td>
                     </tr>
-                    <br/> 
-             </table><br/>
+             </table>
+             <br/>
+             <input type="hidden" name="idEstudio" value="<%= est.getIdEstudios() %>">
              <button>Guardar</button>
              </form>
     </body>

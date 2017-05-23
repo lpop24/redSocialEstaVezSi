@@ -81,68 +81,6 @@
                     </tr>
                 </tbody>
             </table>
-                    <!--
-            <table>
-                <th>Estudios</th>
-                    <%for(Estudios est: usuario.getEstudiosCollection()){ %>
-                    <tr><td><input type="hidden" name="idEstudio" value="<%= est.getIdEstudios() %>"></td></tr>
-                    <tr>
-                    <td><b>Nombre: </b></td><td><input type="text" name="nombreCentro" value="<%= est.getNombreCentro() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de inicio: </b></td><td>
-                    <input type="text" name="fechaInicioEstudio" value="<%= est.getFechaInicioEstudios() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de finalización: </b></td><td>
-                    <input type="text" name="fechaFinEstudio" value="<%= est.getFechaFinEstudios() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Ubicación: </b></td><td><input type="text" name="ubicacionCentro" value="<%= est.getUbicacionCentro() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Descripción: </b></td><td><input type="text" name="descripcionCentro" value="<%= est.getDescripcionCentro() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td> <br/></td>
-                    </tr>
-                    <br/>
-                    <%}%>
-              </table><br/>
-              <table>
-                <th>Experiencia Laboral</th>
-                    <%for(Experiencialaboral exp: usuario.getExperiencialaboralCollection()){ %>
-                    <tr><td><input type="hidden" name="idLaboral" value="<%= exp.getIdExperienciaLaboral() %>"></td></tr>
-                    <tr>
-                    <td><b>Nombre: </b></td><td><input type="text" name="nombreEmpresa" value="<%= exp.getNombreEmpresa() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Puesto: </b></td><td><input type="text" name="puesto" value="<%= exp.getPuesto() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de inicio: </b></td><td>
-                    <input type="text" name="fechaInicioLaboral" value="<%= exp.getFechaInicioLaboral() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Fecha de finalización: </b></td><td>
-                    <input type="text" name="fechaFinLaboral" value="<%= exp.getFechaFinLaboral() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Web: </b></td><td><input type="text" name="paginaWebEmpresa" value="<%= exp.getPaginaWebEmpresa() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Ubicación: </b></td><td><input type="text" name="ubicacionEmpresa" value="<%= exp.getUbicacionEmpresa() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td><b>Descripción: </b></td><td><input type="text" name="descripcionEmpresa" value="<%= exp.getDescripcionEmpresa() %>"><br/></td>
-                    </tr>
-                    <tr>
-                    <td> <br/></td>
-                    </tr>
-                    <br/>
-                    <%}%>
-              </table>
-                    -->
             <button>Guardar</button>
         </form>
     </body>

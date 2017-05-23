@@ -63,7 +63,7 @@
                     </tr>
                     <tr>
                         <td>Pagina web:</td>
-                        <td><input type="text" name="pagina_web" ></td>
+                        <td><input type="text" name="paginaWebUsuario" ></td>
                     </tr>
                     <tr>
                         <td>Aficiones:</td>
@@ -79,5 +79,6 @@
                     
             <button>Guardar</button>
         </form>
+        <input type="button" value="Cancelar" onClick="location.href = 'login.jsp'">
     </body>
 </html>

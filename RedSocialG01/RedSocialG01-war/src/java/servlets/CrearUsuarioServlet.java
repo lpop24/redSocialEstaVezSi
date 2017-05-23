@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entity.Experiencialaboral;
 import entity.Login;
 import entity.Usuario;
 import facade.EstudiosFacade;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -84,7 +86,7 @@ public class CrearUsuarioServlet extends HttpServlet {
         
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
-        java.util.Date fechaNacimiento = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaNacimiento"));
+        java.util.Date fechaNacimiento = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaNacimiento"));
         String instagram = request.getParameter("instagram");
         String correoElectronico = request.getParameter("correoElectronico");
         String twitter = request.getParameter("twitter");
@@ -107,8 +109,36 @@ public class CrearUsuarioServlet extends HttpServlet {
         
         this.usuarioFacade.create(usuario);
         
-//        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
-//        rd.forward(request, response);
+        /**
+         * EXPERIENCIA LABORAL
+         **/
+        
+//        Collection<Experiencialaboral> experienciaLaboral;
+//        Experiencialaboral explaboral = new Experiencialaboral();
+//        
+//        String nombreEmpresa = request.getParameter("nombreEmpresa");
+//        java.util.Date fechaInicioLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioLaboral"));
+//        java.util.Date fechaFinLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinLaboral"));
+//        String ubicacionEmpresa = request.getParameter("ubicacionEmpresa");
+//        String paginaWebEmpresa = request.getParameter("paginaWebEmpresa");
+//        String descripcionEmpresa = request.getParameter("descripcionEmpresa");
+//        String puesto = request.getParameter("puesto");
+//        
+//        
+//        explaboral.setNombreEmpresa(nombreEmpresa);
+//        explaboral.setFechaInicioLaboral(fechaInicioLaboral);
+//        explaboral.setFechaFinLaboral(fechaFinLaboral);
+//        explaboral.setUbicacionEmpresa(ubicacionEmpresa);
+//        explaboral.setPaginaWebEmpresa(paginaWebEmpresa);
+//        explaboral.setDescripcionEmpresa(descripcionEmpresa);
+//        explaboral.setPuesto(puesto);
+//        explaboral.setExpLaboralUsuarioFK(usuario);
+//        
+//        this.experiencialaboralFacade.create(explaboral);
+//        usuario.getExperiencialaboralCollection().add(explaboral);
+        
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/usuarioCreado.jsp");
+        rd.forward(request, response);
         
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {

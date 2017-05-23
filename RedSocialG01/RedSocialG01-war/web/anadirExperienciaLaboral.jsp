@@ -4,7 +4,7 @@
     Author     : Loubna Channouf Cherradi
 --%>
 
-<%@page import="entity.Usuario"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="entity.Experiencialaboral"%>
 
@@ -16,8 +16,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nueva Experiencia Laboral</title>
         <style>
             table {
                 width: 25%;
@@ -34,6 +32,8 @@
                 background-color: #dddddd;
             }
         </style>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Nueva Experiencia Laboral</title>
     </head>
     <body>
         <h1>Añadir Experiencia Laboral</h1>

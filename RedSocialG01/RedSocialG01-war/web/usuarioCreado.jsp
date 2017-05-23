@@ -1,7 +1,7 @@
 <%-- 
     Document   : usuarioCreado
     Created on : 23-may-2017, 10:25:49
-    Author     : Usuario
+    Author     : Loubna Channouf Cherradi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -39,4 +39,12 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
         return q.getResultList();
     }
     
+//    public Estudios findEstudioPorIdEstudio(int id)
+//    {
+//        Query q;
+//        
+//        q = em.createQuery("select est from Estudios est where est.idEstudios = :id");
+//        q.setParameter("id", id);
+//        return (Estudios) q.getSingleResult();
+//    }
 }

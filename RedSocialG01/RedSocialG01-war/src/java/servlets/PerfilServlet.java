@@ -9,7 +9,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Servlets;
+package servlets;
 
 import entity.Estudios;
 import entity.Experiencialaboral;
@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet(name = "Perfilservlet", urlPatterns = {"/Perfilservlet"})
+@WebServlet(name = "PerfilServlet", urlPatterns = {"/PerfilServlet"})
 public class PerfilServlet extends HttpServlet {
 
     @EJB
@@ -114,11 +114,11 @@ public class PerfilServlet extends HttpServlet {
         int idLista = id;
         
         List<Experiencialaboral> experiencia = experiencialaboralFacade.findExperienciaslaboralesPoridUsuario(idLista);
-        request.setAttribute ("experiencia", experiencia);
+        session.setAttribute ("experiencia", experiencia);
         
         
         List<Estudios> estudios =estudiosFacade.findEstudiosPoridUsuario(idLista);
-        request.setAttribute ("estudios", estudios);
+        session.setAttribute ("estudios", estudios);
         
         RequestDispatcher rd;
         

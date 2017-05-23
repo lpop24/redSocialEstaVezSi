@@ -5,15 +5,10 @@
  */
 package servlets;
 
-import entity.Experiencialaboral;
+import facade.EstudiosFacade;
 import facade.ExperiencialaboralFacade;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,11 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DaniUni
  */
-@WebServlet(name = "ActualizarExperiencia", urlPatterns = {"/ActualizarExperiencia"})
-public class ActualizarExperienciaLaboralServlet extends HttpServlet {
+@WebServlet(name = "BorrarELyEstudio", urlPatterns = {"/BorrarELyEstudio"})
+public class BorrarELyEstudioServlet extends HttpServlet {
 
     @EJB
-    private ExperiencialaboralFacade experiencialaboralFacade;
+    private EstudiosFacade estudiosFacade;
+    
+    @EJB
+    private ExperiencialaboralFacade experienciaFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,32 +39,24 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
+        
+        
+        String idLaboral = request.getParameter("idLaboral");
+        String idEstudio = request.getParameter("idEstudio");
+        
 
-        String idExperiencia = request.getParameter("idExperienciaLaboral");
-        String nombreEmpresa = request.getParameter("nombreEmpresa");
-        String puesto = request.getParameter("puesto");
-        String ubicacion = request.getParameter("ubicacionEmpresa");
-        String descripcion = request.getParameter("descripcionEmpresa");
-        String web = request.getParameter("web");
+        if(idLaboral != null){
+            int idLaboralInt = new Integer(idLaboral);
+            experienciaFacade.borrarExperienciaLaboral(idLaboralInt);
+        }else{
+            int idEstudioInt = new Integer(idEstudio);
+            estudiosFacade.borrarEstudio(idEstudioInt);
+        }
         
-        int idExpint = new Integer(idExperiencia);
+        RequestDispatcher rd;
         
-        Date fechaInicioExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaInicioExp"));
-        Date fechaFinExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaFinExp"));
-        
-        Experiencialaboral exp = this.experiencialaboralFacade.find(idExpint);
-        
-        exp.setNombreEmpresa(nombreEmpresa);
-        exp.setUbicacionEmpresa(ubicacion);  
-        exp.setPuesto(puesto); 
-        exp.setPaginaWebEmpresa(web);
-        exp.setFechaInicioLaboral(fechaInicioExp);
-        exp.setFechaFinLaboral(fechaFinExp);
-        exp.setDescripcionEmpresa(descripcion);
-        
-        this.experiencialaboralFacade.edit(exp);
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
+        rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
     }
 
@@ -82,11 +72,7 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -100,11 +86,7 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

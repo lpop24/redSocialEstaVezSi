@@ -8,7 +8,6 @@ package servlets;
 import entity.Login;
 import facade.LoginFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -65,7 +64,6 @@ public class LoginServlet extends HttpServlet {
                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
                rd.forward(request, response);
                 
-                //response.sendRedirect(request.getContextPath() + "/Perfilservlet");
             }   
         }
     }

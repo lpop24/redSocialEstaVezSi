@@ -5,34 +5,24 @@
  */
 package servlets;
 
-import entity.Estudios;
-import facade.EstudiosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.jboss.weld.servlet.SessionHolder;
 
 /**
  *
- * @author RetailAdmin
+ * @author DaniUni
  */
-@WebServlet(name = "ActualizarEstudio", urlPatterns = {"/ActualizarEstudio"})
-public class ActualizarEstudioServlet extends HttpServlet {
+@WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
+public class CerrarSesionServlet extends HttpServlet {
 
-    @EJB
-    private EstudiosFacade estudiosFacade;
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,32 +31,20 @@ public class ActualizarEstudioServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
-        String idEstudio = request.getParameter("idEstudio");
-        String nombreCentro = request.getParameter("nombreCentro");
-        String ubicacion = request.getParameter("ubicacionCentro");
-        String descripcion = request.getParameter("descripcionCentro");
-        String dateInicio = request.getParameter("fechaInicioEstudio");
-        String dateFin = request.getParameter("fechaFinEstudio");
-
+            throws ServletException, IOException {
         
-        int idEstudioint = new Integer(idEstudio);
-        Date fechaInicioEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateInicio);
-        Date fechaFinEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateFin);
+        HttpSession session = request.getSession();
         
-        Estudios est = this.estudiosFacade.find(idEstudioint);
+        session.removeAttribute("usuario");
+        session.removeAttribute("id");
+        session.removeAttribute("estudio");
+        session.removeAttribute("experiencia");
         
-        est.setNombreCentro(nombreCentro);
-        est.setUbicacionCentro(ubicacion);        
-        est.setFechaInicioEstudios(fechaInicioEstudio);
-        est.setFechaFinEstudios(fechaFinEstudio);
-        est.setDescripcionCentro(descripcion);
+        RequestDispatcher rd;
         
-        this.estudiosFacade.edit(est);
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
+        rd = this.getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
 
@@ -82,11 +60,7 @@ public class ActualizarEstudioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -100,11 +74,7 @@ public class ActualizarEstudioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

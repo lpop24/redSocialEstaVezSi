@@ -18,7 +18,6 @@ import facade.EstudiosFacade;
 import facade.ExperiencialaboralFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -103,14 +102,7 @@ public class PerfilServlet extends HttpServlet {
         
         byte[] foto = user.getFoto();
         request.setAttribute("foto", foto);
-        
-        /*
-        Collection<Experiencialaboral> experiencia = user.getExperiencialaboralCollection();
-        request.setAttribute ("experiencia", experiencia);
-        
-        Collection<Estudios> estudios = user.getEstudiosCollection();
-        request.setAttribute ("estudios", estudios);
-        */
+
         int idLista = id;
         
         List<Experiencialaboral> experiencia = experiencialaboralFacade.findExperienciaslaboralesPoridUsuario(idLista);

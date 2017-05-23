@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -48,17 +49,20 @@ public class ActualizarEstudioServlet extends HttpServlet {
         String nombreCentro = request.getParameter("nombreCentro");
         String ubicacion = request.getParameter("ubicacionCentro");
         String descripcion = request.getParameter("descripcionCentro");
+        String dateInicio = request.getParameter("fechaInicioEstudio");
+        String dateFin = request.getParameter("fechaFinEstudio");
+
         
         int idEstudioint = new Integer(idEstudio);
-        //Date fechaInicioEstudio = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioEstudio"));
-        //Date fechaFinEstudio = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinEstudio"));
+        Date fechaInicioEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateInicio);
+        Date fechaFinEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateFin);
         
         Estudios est = this.estudiosFacade.find(idEstudioint);
         
         est.setNombreCentro(nombreCentro);
         est.setUbicacionCentro(ubicacion);        
-        //est.setFechaInicioEstudios(fechaInicioEstudio);
-        //est.setFechaFinEstudios(fechaFinEstudio);
+        est.setFechaInicioEstudios(fechaInicioEstudio);
+        est.setFechaFinEstudios(fechaFinEstudio);
         est.setDescripcionCentro(descripcion);
         
         this.estudiosFacade.edit(est);

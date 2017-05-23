@@ -48,3 +48,4 @@ public class ExperiencialaboralFacade extends AbstractFacade<Experiencialaboral>
         
         int count = q.executeUpdate();
     }
+}

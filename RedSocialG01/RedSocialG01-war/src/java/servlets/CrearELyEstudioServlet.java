@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import entity.Estudios;
 import entity.Experiencialaboral;
 import entity.Usuario;
 import facade.EstudiosFacade;
@@ -31,18 +32,16 @@ import javax.servlet.http.HttpSession;
  * @author Loubna Channouf Cherradi
  */
 @WebServlet(name = "CrearExperienciaLaboralYEstudios", urlPatterns = {"/CrearExperienciaLaboralYEstudios"})
-public class CrearELYEstudios extends HttpServlet {
+public class CrearELyEstudioServlet extends HttpServlet {
 
     @EJB
     private UsuarioFacade usuarioFacade;
-    
-     @EJB
+
+    @EJB
     private EstudiosFacade estudiosFacade;
 
-      @EJB
+    @EJB
     private ExperiencialaboralFacade experiencialaboralFacade;
-
-      
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,53 +54,68 @@ public class CrearELYEstudios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        
-        HttpSession session = request.getSession();        
-        int idUsuario = (int) session.getAttribute("id");
-        
-        List<Usuario> usuarios;
-        
-        usuarios = usuarioFacade.encontrarPorId(idUsuario);
-        
-        Usuario usuario = usuarios.get(0);
-        
-        /**
-         * EXPERIENCIA LABORAL
-         **/ 
-        
-        Experiencialaboral explaboral = new Experiencialaboral();
-        
-        String nombreEmpresa = request.getParameter("nombreEmpresa");
-        java.util.Date fechaInicioLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioLaboral"));
-        java.util.Date fechaFinLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinLaboral"));
-        String ubicacionEmpresa = request.getParameter("ubicacionEmpresa");
-        String paginaWebEmpresa = request.getParameter("paginaWebEmpresa");
-        String descripcionEmpresa = request.getParameter("descripcionEmpresa");
-        String puesto = request.getParameter("puesto");
-        
-  
-        explaboral.setNombreEmpresa(nombreEmpresa);
-        explaboral.setFechaInicioLaboral(fechaInicioLaboral);
-        explaboral.setFechaFinLaboral(fechaFinLaboral);
-        explaboral.setUbicacionEmpresa(ubicacionEmpresa);
-        explaboral.setPaginaWebEmpresa(paginaWebEmpresa);
-        explaboral.setDescripcionEmpresa(descripcionEmpresa);
-        explaboral.setPuesto(puesto);
-        explaboral.setExpLaboralUsuarioFK(usuario);
-        
-        this.experiencialaboralFacade.create(explaboral);
-        
-//        Collection<Experiencialaboral> expLaboral = usuario.getExperiencialaboralCollection();
-//        expLaboral.add(explaboral);
-//        usuario.setExperiencialaboralCollection(expLaboral);
-        
 
-        /**
-         * ESTUDIOS
-         **/ 
+        HttpSession session = request.getSession();
+        int idUsuario = (int) session.getAttribute("id");
+
+        List<Usuario> usuarios;
+
+        usuarios = usuarioFacade.encontrarPorId(idUsuario);
+
+        Usuario usuario = usuarios.get(0);
+         
+        String nombreEmpresa = request.getParameter("nombreEmpresa");
+
+        if (nombreEmpresa != null) { //Añadir experiencia laboral
+            
+            Experiencialaboral explaboral = new Experiencialaboral();
+            
+            java.util.Date fechaInicioLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioLaboral"));
+            java.util.Date fechaFinLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinLaboral"));
+            String ubicacionEmpresa = request.getParameter("ubicacionEmpresa");
+            String paginaWebEmpresa = request.getParameter("paginaWebEmpresa");
+            String descripcionEmpresa = request.getParameter("descripcionEmpresa");
+            String puesto = request.getParameter("puesto");
+
+            explaboral.setNombreEmpresa(nombreEmpresa);
+            explaboral.setFechaInicioLaboral(fechaInicioLaboral);
+            explaboral.setFechaFinLaboral(fechaFinLaboral);
+            explaboral.setUbicacionEmpresa(ubicacionEmpresa);
+            explaboral.setPaginaWebEmpresa(paginaWebEmpresa);
+            explaboral.setDescripcionEmpresa(descripcionEmpresa);
+            explaboral.setPuesto(puesto);
+            explaboral.setExpLaboralUsuarioFK(usuario);
+
+            this.experiencialaboralFacade.create(explaboral);
+
+        } else { //añadir estudios
+
+            Estudios estudios = new Estudios();
+
+            String nombreCentro = request.getParameter("nombreCentro");
+            java.util.Date fechaInicioEstudios = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioEstudios"));
+            java.util.Date fechaFinEstudios = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinEstudios"));
+            String descripcionCentro = request.getParameter("descripcionCentro");
+            String ubicacionCentro = request.getParameter("ubicacionCentro");
+
+            estudios.setNombreCentro(nombreCentro);
+            estudios.setFechaInicioEstudios(fechaInicioEstudios);
+            estudios.setFechaFinEstudios(fechaFinEstudios);
+            estudios.setDescripcionCentro(descripcionCentro);
+            estudios.setUbicacionCentro(ubicacionCentro);
+            estudios.setEstudiosUsuarioFK(usuario);
+
+            this.estudiosFacade.create(estudios);
+        }
 
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
+        
+                
+//        Collection<Experiencialaboral> expLaboral = usuario.getExperiencialaboralCollection();
+//        expLaboral.add(explaboral);
+//        usuario.setExperiencialaboralCollection(expLaboral);
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -116,11 +130,11 @@ public class CrearELYEstudios extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             processRequest(request, response);
-         } catch (ParseException ex) {
-             Logger.getLogger(CrearELYEstudios.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(CrearELyEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -134,11 +148,11 @@ public class CrearELYEstudios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             processRequest(request, response);
-         } catch (ParseException ex) {
-             Logger.getLogger(CrearELYEstudios.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(CrearELyEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

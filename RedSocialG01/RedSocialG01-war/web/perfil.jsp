@@ -147,7 +147,7 @@
                             <td><b>Descripción: </b></td><td><%= est.getDescripcionCentro() %><br/></td>
                             </tr>
                             <tr>
-                                <td><a href="BuscarEstudio?id=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
+                                <td><a href="BuscarELyEstudio?idBuscarEstudio=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
                                 <td><a href="BorrarELyEstudio?idEstudio=<%= est.getIdEstudios() %>">Borrar Estudio</a></td>
                             </tr>
                             <br/>
@@ -191,7 +191,7 @@
                         <td><b>Descripción: </b></td><td><%= exp.getDescripcionEmpresa() %><br/></td>
                         </tr>
                         <tr>
-                           <td><a href="BuscarExperienciaLaboral?id=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia</a></td>
+                           <td><a href="BuscarELyEstudio?idBuscarLaboral=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia</a></td>
                            <td><a href="BorrarELyEstudio?idLaboral=<%= exp.getIdExperienciaLaboral() %>">Borrar Experiencia</a></td>
                         </tr>
                         <br/>

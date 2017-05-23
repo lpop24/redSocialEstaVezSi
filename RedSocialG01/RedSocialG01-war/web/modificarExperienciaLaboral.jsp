@@ -1,7 +1,7 @@
 <%-- 
     Document   : modificarExperienciaLaboral
     Created on : 22-may-2017, 17:06:36
-    Author     : RetailAdmin
+    Author     : Alvaro Medina Martinez y Daniel Alvarez Valero
 --%>
 
 <%@page import="entity.Experiencialaboral"%>
@@ -31,7 +31,7 @@
     </head>
     <body>
         <h1>Modificar experiencia</h1>
-        <form name="formularioExperiencia" method="post" action="ActualizarExperiencia">
+        <form name="formularioExperiencia" method="post" action="ActualizarELyEstudio">
             <table>
                 <th>Experiencia</th>  
                     <tr>

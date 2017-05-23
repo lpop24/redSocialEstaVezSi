@@ -6,15 +6,12 @@
 package servlets;
 
 import entity.Estudios;
+import entity.Experiencialaboral;
 import facade.EstudiosFacade;
+import facade.ExperiencialaboralFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,14 +22,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author RetailAdmin
+ * @author Alvaro Medina Martinez y Daniel Alvarez Valero
  */
-@WebServlet(name = "ActualizarEstudio", urlPatterns = {"/ActualizarEstudio"})
-public class ActualizarEstudioServlet extends HttpServlet {
+@WebServlet(name = "BuscarELyEstudio", urlPatterns = {"/BuscarELyEstudio"})
+public class BuscarELyEstudioServlet extends HttpServlet {
 
     @EJB
     private EstudiosFacade estudiosFacade;
-    
+       
+    @EJB
+    private ExperiencialaboralFacade expFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,33 +40,32 @@ public class ActualizarEstudioServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
-        String idEstudio = request.getParameter("idEstudio");
-        String nombreCentro = request.getParameter("nombreCentro");
-        String ubicacion = request.getParameter("ubicacionCentro");
-        String descripcion = request.getParameter("descripcionCentro");
-        String dateInicio = request.getParameter("fechaInicioEstudio");
-        String dateFin = request.getParameter("fechaFinEstudio");
+            throws ServletException, IOException {
+        
+        String idStringEstudio = request.getParameter("idBuscarEstudio");
+        if(idStringEstudio != null)
+        {
+            int idEstudio = new Integer(idStringEstudio);
+            Estudios est = estudiosFacade.find(idEstudio);
+            
+            request.setAttribute("estudio", est);
 
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/modificarEstudio.jsp");
+            rd.forward(request, response);
+        }
+        else
+        {
+            String idStringLaboral = request.getParameter("idBuscarLaboral");
+            int idLaboral = new Integer(idStringLaboral);
+            Experiencialaboral exp = expFacade.find(idLaboral);
         
-        int idEstudioint = new Integer(idEstudio);
-        Date fechaInicioEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateInicio);
-        Date fechaFinEstudio = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateFin);
-        
-        Estudios est = this.estudiosFacade.find(idEstudioint);
-        
-        est.setNombreCentro(nombreCentro);
-        est.setUbicacionCentro(ubicacion);        
-        est.setFechaInicioEstudios(fechaInicioEstudio);
-        est.setFechaFinEstudios(fechaFinEstudio);
-        est.setDescripcionCentro(descripcion);
-        
-        this.estudiosFacade.edit(est);
-        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
-        rd.forward(request, response);
+            request.setAttribute("experiencia", exp);
+
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/modificarExperienciaLaboral.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,11 +80,7 @@ public class ActualizarEstudioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -100,11 +94,7 @@ public class ActualizarEstudioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ActualizarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

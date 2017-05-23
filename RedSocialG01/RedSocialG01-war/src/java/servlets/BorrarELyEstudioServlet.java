@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DaniUni
+ * @author Daniel Alvarez Valero y Alvaro Medina Martinez
  */
 @WebServlet(name = "BorrarELyEstudio", urlPatterns = {"/BorrarELyEstudio"})
 public class BorrarELyEstudioServlet extends HttpServlet {

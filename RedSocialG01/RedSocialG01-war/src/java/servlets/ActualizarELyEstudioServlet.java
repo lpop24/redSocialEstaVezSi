@@ -5,9 +5,12 @@
  */
 package servlets;
 
+import entity.Estudios;
 import entity.Experiencialaboral;
+import facade.EstudiosFacade;
 import facade.ExperiencialaboralFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,11 +27,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author DaniUni
+ * @author Alvaro Medina Martinez y Daniel Alvarez Valero
  */
-@WebServlet(name = "ActualizarExperiencia", urlPatterns = {"/ActualizarExperiencia"})
-public class ActualizarExperienciaLaboralServlet extends HttpServlet {
+@WebServlet(name = "ActualizarELyEstudio", urlPatterns = {"/ActualizarELyEstudio"})
+public class ActualizarELyEstudioServlet extends HttpServlet {
 
+    @EJB
+    private EstudiosFacade estudiosFacade;
+    
     @EJB
     private ExperiencialaboralFacade experiencialaboralFacade;
     /**
@@ -39,15 +45,42 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
+        
+        String idEstudio = request.getParameter("idEstudio");
+        if(idEstudio != null)
+        {
+        String nombreCentro = request.getParameter("nombreCentro");
+        String ubicacionEstudio = request.getParameter("ubicacionCentro");
+        String descripcionEstudio = request.getParameter("descripcionCentro");
+        String dateInicioEstudio = request.getParameter("fechaInicioEstudio");
+        String dateFinEstudio = request.getParameter("fechaFinEstudio");
 
+        
+        int idEstudioint = new Integer(idEstudio);
+        Date fechaInicioEstudioDate = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateInicioEstudio);
+        Date fechaFinEstudioDate = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateFinEstudio);
+        
+        Estudios est = this.estudiosFacade.find(idEstudioint);
+        
+        est.setNombreCentro(nombreCentro);
+        est.setUbicacionCentro(ubicacionEstudio);        
+        est.setFechaInicioEstudios(fechaInicioEstudioDate);
+        est.setFechaFinEstudios(fechaFinEstudioDate);
+        est.setDescripcionCentro(descripcionEstudio);
+        
+        this.estudiosFacade.edit(est);
+        }
+        else
+        {
         String idExperiencia = request.getParameter("idExperienciaLaboral");
         String nombreEmpresa = request.getParameter("nombreEmpresa");
         String puesto = request.getParameter("puesto");
-        String ubicacion = request.getParameter("ubicacionEmpresa");
-        String descripcion = request.getParameter("descripcionEmpresa");
+        String ubicacionEmpresa = request.getParameter("ubicacionEmpresa");
+        String descripcionEmpresa = request.getParameter("descripcionEmpresa");
         String web = request.getParameter("web");
         
         int idExpint = new Integer(idExperiencia);
@@ -58,14 +91,16 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
         Experiencialaboral exp = this.experiencialaboralFacade.find(idExpint);
         
         exp.setNombreEmpresa(nombreEmpresa);
-        exp.setUbicacionEmpresa(ubicacion);  
+        exp.setUbicacionEmpresa(ubicacionEmpresa);  
         exp.setPuesto(puesto); 
         exp.setPaginaWebEmpresa(web);
         exp.setFechaInicioLaboral(fechaInicioExp);
         exp.setFechaFinLaboral(fechaFinExp);
-        exp.setDescripcionEmpresa(descripcion);
+        exp.setDescripcionEmpresa(descripcionEmpresa);
         
         this.experiencialaboralFacade.edit(exp);
+        }
+        
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
     }
@@ -85,7 +120,7 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActualizarELyEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -103,7 +138,7 @@ public class ActualizarExperienciaLaboralServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(ActualizarExperienciaLaboralServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActualizarELyEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -18,7 +18,7 @@ import org.jboss.weld.servlet.SessionHolder;
 
 /**
  *
- * @author DaniUni
+ * @author Daniel Alvarez Valero y Alvaro Medina Martinez
  */
 @WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
 public class CerrarSesionServlet extends HttpServlet {

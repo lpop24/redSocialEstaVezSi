@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
     Created on : 22-may-2017, 13:05:22
-    Author     : DaniUni
+    Author     : Daniel Alvarez Valero
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

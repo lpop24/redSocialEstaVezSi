@@ -33,7 +33,7 @@
     </head>
     <body>
         <h1>Modificar estudio</h1>
-        <form name="formularioEstudio" method="post" action="ActualizarEstudio">
+        <form name="formularioEstudio" method="post" action="ActualizarELyEstudio">
             <table>
                 <th>Estudio</th>  
                     <tr>

@@ -5,11 +5,8 @@
  */
 package servlets;
 
-import entity.Login;
-import facade.LoginFacade;
 import java.io.IOException;
-import java.util.List;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.jboss.weld.servlet.SessionHolder;
 
 /**
  *
  * @author DaniUni
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
-    
-    @EJB
-    private LoginFacade loginFacade;
+@WebServlet(name = "CerrarSesion", urlPatterns = {"/CerrarSesion"})
+public class CerrarSesionServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,34 +34,18 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        List<Login> listaLogin;
         
-        int idUser = -1; //Si no consigue el ID, devuelve -1 como error
+        HttpSession session = request.getSession();
         
-        String nombreUsuario = request.getParameter("nombreUsuario");
-        String pass = request.getParameter("passUsuario");
+        session.removeAttribute("usuario");
+        session.removeAttribute("id");
+        session.removeAttribute("estudio");
+        session.removeAttribute("experiencia");
         
-        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/loginFallido.jsp");
-            rd.forward(request, response);
-        }else{
-            listaLogin = this.loginFacade.encontrarUsuario(nombreUsuario, pass); //Debería recibir 1 solo resultado
-            if(listaLogin.isEmpty()){
-                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/loginFallido.jsp");
-                rd.forward(request, response);
-            }else{
-               idUser = listaLogin.get(0).getIdLogin();
-               
-               HttpSession session = request.getSession();
-
-               session.setAttribute("id", idUser);
-               
-               RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
-               rd.forward(request, response);
-                
-            }   
-        }
+        RequestDispatcher rd;
+        
+        rd = this.getServletContext().getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

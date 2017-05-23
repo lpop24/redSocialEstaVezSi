@@ -47,4 +47,13 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
 //        q.setParameter("id", id);
 //        return (Estudios) q.getSingleResult();
 //    }
+    
+    public void borrarEstudio(int id) {
+        Query q;
+        
+        q = em.createQuery("delete from Estudios est where est.idEstudios = :id");
+        q.setParameter("id",  id);
+        
+        int count = q.executeUpdate();
+    }
 }

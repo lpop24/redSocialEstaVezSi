@@ -5,10 +5,10 @@
  */
 package servlets;
 
-import entity.Login;
-import facade.LoginFacade;
+import facade.EstudiosFacade;
+import facade.ExperiencialaboralFacade;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,17 +16,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author DaniUni
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "BorrarELyEstudio", urlPatterns = {"/BorrarELyEstudio"})
+public class BorrarELyEstudioServlet extends HttpServlet {
+
+    @EJB
+    private EstudiosFacade estudiosFacade;
     
     @EJB
-    private LoginFacade loginFacade;
+    private ExperiencialaboralFacade experienciaFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,34 +40,24 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        List<Login> listaLogin;
         
-        int idUser = -1; //Si no consigue el ID, devuelve -1 como error
         
-        String nombreUsuario = request.getParameter("nombreUsuario");
-        String pass = request.getParameter("passUsuario");
+        String idLaboral = request.getParameter("idLaboral");
+        String idEstudio = request.getParameter("idEstudio");
         
-        if (nombreUsuario == null || nombreUsuario.isEmpty()) {
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/loginFallido.jsp");
-            rd.forward(request, response);
-        }else{
-            listaLogin = this.loginFacade.encontrarUsuario(nombreUsuario, pass); //Debería recibir 1 solo resultado
-            if(listaLogin.isEmpty()){
-                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/loginFallido.jsp");
-                rd.forward(request, response);
-            }else{
-               idUser = listaLogin.get(0).getIdLogin();
-               
-               HttpSession session = request.getSession();
 
-               session.setAttribute("id", idUser);
-               
-               RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
-               rd.forward(request, response);
-                
-            }   
+        if(idLaboral != null){
+            int idLaboralInt = new Integer(idLaboral);
+            experienciaFacade.borrarExperienciaLaboral(idLaboralInt);
+        }else{
+            int idEstudioInt = new Integer(idEstudio);
+            estudiosFacade.borrarEstudio(idEstudioInt);
         }
+        
+        RequestDispatcher rd;
+        
+        rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

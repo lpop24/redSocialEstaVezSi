@@ -38,4 +38,13 @@ public class ExperiencialaboralFacade extends AbstractFacade<Experiencialaboral>
         q.setParameter("id",  id);
         return q.getResultList();
     }
+    
+    public void borrarExperienciaLaboral(int id) {
+        Query q; 
+        
+        q = em.createQuery("DELETE FROM Experiencialaboral exp where exp.idExperienciaLaboral = :id");
+        q.setParameter("id",  id);
+        
+        int count = q.executeUpdate();
+    }
 }

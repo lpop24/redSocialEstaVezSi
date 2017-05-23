@@ -224,6 +224,7 @@
                             </tr>
                             <tr>
                                 <td><a href="BuscarEstudio?id=<%= est.getIdEstudios() %>">Editar Estudio</a></td>
+                                <td><a href="BorrarELyEstudio?idEstudio=<%= est.getIdEstudios() %>">Borrar Estudio</a></td>
                             </tr>
                             <br/>
                         </table>
@@ -264,6 +265,7 @@
                         </tr>
                         <tr>
                            <td><a href="BuscarExperienciaLaboral?id=<%= exp.getIdExperienciaLaboral() %>">Editar Experiencia</a></td>
+                           <td><a href="BorrarELyEstudio?idLaboral=<%= exp.getIdExperienciaLaboral() %>">Borrar Experiencia</a></td>
                         </tr>
                         <br/>
                         </table>
@@ -271,5 +273,7 @@
                     <br/>
             <% } %>
         <br/>
+        
+        <input type="button" value="Cerrar Sesión" onClick="location.href = 'CerrarSesion'"> 
     </body>
 </html>

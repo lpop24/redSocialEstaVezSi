@@ -4,12 +4,16 @@
     Author     : Alberto Cazorla Suarez
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="facade.EstudiosFacade"%>
 <%@page import="entity.Estudios"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% Estudios est = (Estudios) request.getAttribute("estudio"); %>
+<%
+    Estudios est = (Estudios) request.getAttribute("estudio");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+%>
 <html>
 <style>
             table {
@@ -41,11 +45,11 @@
                     </tr>
                     <tr>
                     <td><b>Fecha de inicio: </b></td><td>
-                    <input type="text" name="fechaInicioEstudio" value="<%= est.getFechaInicioEstudios() %>"><br/></td>
+                    <input type="date" name="fechaInicioEstudio" value="<%= sdf.format(est.getFechaInicioEstudios()) %>"><br/></td>
                     </tr>
                     <tr>
                     <td><b>Fecha de finalización: </b></td><td>
-                    <input type="text" name="fechaFinEstudio" value="<%= est.getFechaFinEstudios() %>"><br/></td>
+                    <input type="date" name="fechaFinEstudio" value="<%= sdf.format(est.getFechaFinEstudios()) %>"><br/></td>
                     </tr>
                     <tr>
                     <td><b>Ubicación: </b></td><td><input type="text" name="ubicacionCentro" value="<%= est.getUbicacionCentro() %>"><br/></td>

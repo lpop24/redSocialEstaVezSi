@@ -70,8 +70,8 @@ public class CrearELyEstudioServlet extends HttpServlet {
             
             Experiencialaboral explaboral = new Experiencialaboral();
             
-            java.util.Date fechaInicioLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioLaboral"));
-            java.util.Date fechaFinLaboral = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinLaboral"));
+            java.util.Date fechaInicioLaboral = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioLaboral"));
+            java.util.Date fechaFinLaboral = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinLaboral"));
             String ubicacionEmpresa = request.getParameter("ubicacionEmpresa");
             String paginaWebEmpresa = request.getParameter("paginaWebEmpresa");
             String descripcionEmpresa = request.getParameter("descripcionEmpresa");
@@ -93,8 +93,8 @@ public class CrearELyEstudioServlet extends HttpServlet {
             Estudios estudios = new Estudios();
 
             String nombreCentro = request.getParameter("nombreCentro");
-            java.util.Date fechaInicioEstudios = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaInicioEstudios"));
-            java.util.Date fechaFinEstudios = new SimpleDateFormat("dd-MM-yyy").parse(request.getParameter("fechaFinEstudios"));
+            java.util.Date fechaInicioEstudios = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioEstudios"));
+            java.util.Date fechaFinEstudios = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinEstudios"));
             String descripcionCentro = request.getParameter("descripcionCentro");
             String ubicacionCentro = request.getParameter("ubicacionCentro");
 
@@ -110,12 +110,6 @@ public class CrearELyEstudioServlet extends HttpServlet {
 
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/PerfilServlet");
         rd.forward(request, response);
-        
-                
-//        Collection<Experiencialaboral> expLaboral = usuario.getExperiencialaboralCollection();
-//        expLaboral.add(explaboral);
-//        usuario.setExperiencialaboralCollection(expLaboral);
-       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

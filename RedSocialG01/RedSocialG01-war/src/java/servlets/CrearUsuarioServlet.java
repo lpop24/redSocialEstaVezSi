@@ -105,15 +105,9 @@ public class CrearUsuarioServlet extends HttpServlet {
         usuario.setLoginFK(login);
         
         this.usuarioFacade.create(usuario);
-        
-        
-
-
-        
-        
+                
         RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/usuarioCreado.jsp");
         rd.forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

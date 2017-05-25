@@ -4,10 +4,14 @@
     Author     : Alvaro Medina Martinez y Daniel Alvarez Valero
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entity.Experiencialaboral"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<% Experiencialaboral exp = (Experiencialaboral) request.getAttribute("experiencia"); %>
+<%
+    Experiencialaboral exp = (Experiencialaboral) request.getAttribute("experiencia");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+%>
 <html>
 <style>
             table {
@@ -42,11 +46,11 @@
                     </tr>
                     <tr>
                     <td><b>Fecha de inicio: </b></td><td>
-                    <input type="text" name="fechaInicioExp" value="<%= exp.getFechaInicioLaboral()%>"><br/></td>
+                    <input type="date" name="fechaInicioExp" value="<%= sdf.format(exp.getFechaInicioLaboral()) %>"><br/></td>
                     </tr>
                     <tr>
                     <td><b>Fecha de finalización: </b></td><td>
-                    <input type="text" name="fechaFinExp" value="<%= exp.getFechaFinLaboral()%>"><br/></td>
+                    <input type="date" name="fechaFinExp" value="<%= sdf.format(exp.getFechaFinLaboral()) %>"><br/></td>
                     </tr>
                     <tr>
                     <td><b>Ubicación: </b></td><td><input type="text" name="ubicacionEmpresa" value="<%= exp.getUbicacionEmpresa() %>"><br/></td>

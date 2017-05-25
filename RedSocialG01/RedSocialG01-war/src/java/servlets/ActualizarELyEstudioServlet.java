@@ -61,8 +61,8 @@ public class ActualizarELyEstudioServlet extends HttpServlet {
 
         
         int idEstudioint = new Integer(idEstudio);
-        Date fechaInicioEstudioDate = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateInicioEstudio);
-        Date fechaFinEstudioDate = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(dateFinEstudio);
+        Date fechaInicioEstudioDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateInicioEstudio);
+        Date fechaFinEstudioDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateFinEstudio);
         
         Estudios est = this.estudiosFacade.find(idEstudioint);
         
@@ -85,8 +85,8 @@ public class ActualizarELyEstudioServlet extends HttpServlet {
         
         int idExpint = new Integer(idExperiencia);
         
-        Date fechaInicioExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaInicioExp"));
-        Date fechaFinExp = new SimpleDateFormat("EEE MMM dd hh:mm:ss zzzz yyyy", Locale.ENGLISH).parse(request.getParameter("fechaFinExp"));
+        Date fechaInicioExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaInicioExp"));
+        Date fechaFinExp = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fechaFinExp"));
         
         Experiencialaboral exp = this.experiencialaboralFacade.find(idExpint);
         

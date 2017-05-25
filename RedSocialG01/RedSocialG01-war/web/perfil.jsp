@@ -45,10 +45,7 @@
               
        String aficiones;
        aficiones = (String) request.getAttribute("aficiones");
-        /*
-        byte[] foto;
-        //foto = (byte[]) request.getAttribute("foto");
-        */
+       
         List<Experiencialaboral> experiencia;
         experiencia = (List<Experiencialaboral>) session.getAttribute("experiencia");
         
@@ -76,6 +73,9 @@
         background-color: #dddddd;
     }
 </style>
+<%
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+%>
 </head>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -91,7 +91,7 @@
                 <td><b>Nombre: </b></td><td><%= nombre %> <%= apellidos %><br/></td>
                 </tr>
                 <tr>
-                <td><b>Fecha de nacimiento: </b> </td><td><%= fechanacimiento %><br/></td>
+                <td><b>Fecha de nacimiento: </b> </td><td><%= sdf.format(fechanacimiento) %><br/></td>
                 </tr>
                 <tr>
                 <td><b>Ciudad de origen: </b></td><td> <%= ciudad %><br/></td>
@@ -132,13 +132,11 @@
                             </tr>
                             <tr>
                             <td><b>Fecha de inicio: </b></td><td>
-                            <%java.util.Date fechaInicioEst=est.getFechaInicioEstudios();%>
-                            <%=fechaInicioEst%><br/></td>
+                            <%=sdf.format(est.getFechaInicioEstudios())%><br/></td>
                             </tr>
                             <tr>
                             <td><b>Fecha de finalización: </b></td><td>
-                            <%java.util.Date fechaFinEst=est.getFechaFinEstudios();%>
-                            <%=fechaFinEst%><br/></td>
+                            <%=sdf.format(est.getFechaFinEstudios())%><br/></td>
                             </tr>
                             <tr>
                             <td><b>Ubicación: </b></td><td><%= est.getUbicacionCentro() %><br/></td>
@@ -173,13 +171,11 @@
                         </tr>
                         <tr>
                         <td><b>Fecha de inicio: </b></td><td>
-                        <%java.util.Date fechaInicioEst=exp.getFechaInicioLaboral();%>
-                        <%=fechaInicioEst%><br/></td>
+                        <%=sdf.format(exp.getFechaInicioLaboral())%><br/></td>
                         </tr>
                         <tr>
                         <td><b>Fecha de finalización: </b></td><td>
-                        <%java.util.Date fechaFinEst=exp.getFechaFinLaboral();%>
-                        <%=fechaFinEst%><br/></td>
+                        <%=sdf.format(exp.getFechaFinLaboral())%><br/></td>
                         </tr>
                         <tr>
                         <td><b>Web: </b></td><td><%= exp.getPaginaWebEmpresa() %><br/></td>

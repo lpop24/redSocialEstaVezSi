@@ -4,11 +4,13 @@
     Author     : Alvaro Medina Martinez
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entity.Experiencialaboral"%>
 <%@page import="entity.Estudios"%>
 <%@page import="entity.Usuario"%>
 <%
     Usuario usuario = (Usuario) session.getAttribute("usuario");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -65,7 +67,7 @@
                     </tr>
                     <tr>
                         <td>Fecha de nacimiento:</td>
-                        <td><input type="text" name="fecha_nacimiento" value="<%= usuario.getFechaNacimiento()%>"></td>
+                        <td><input type="date" name="fecha_nacimiento" value="<%= sdf.format(usuario.getFechaNacimiento()) %>"></td>
                     </tr>
                     <tr>
                         <td>Pagina web:</td>
